@@ -1,15 +1,14 @@
-<!--<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>-->
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
         <style>
             body
             {
-                 font-family:'Times New Roman', Times, serif;
-                background: linear-gradient(120deg, #2980b9, #8e44ad);
+                font-family:'Times New Roman', Times, serif;
+                  background: linear-gradient(120deg, #2980b9, #8e44ad);
                 background-image: fill;
                 height: 100vh;
                 overflow: hidden;
@@ -17,20 +16,24 @@
             .center
             {
                 position: absolute;
-                padding: 20px 10px;
+                padding: 5px 10px;
                 border-radius: 10px;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 400px;
+                width: 300px;
+                height: 300px;
+                outline: 2px solid black;
             }
             .center h1
             {
                 text-align: center;
+                padding: 0 0 10px 0;
+                border-bottom: 1px solid black;
             }
             .center form
             {
-                padding: 0 30px;
+                padding: 10px 30px;
             }
             form .txt_field
             {
@@ -50,7 +53,7 @@
             }
             ::placeholder 
             {
-                color: lightgray;
+                color: black;
                 opacity: 0.7;
             }
             input[type="submit"]
@@ -74,17 +77,12 @@
     </head>
     <body>
         <div class="center">
-            <h1>Admin Login</h1>
-            <form id="loginForm" action="Admin" method="post">
+            <h1>Deletion</h1>
+            <form action="delete_student" method="post">
                 <div class="txt_field">
-                    <input type="text" name="username" placeholder="UserName" required>
-                    
-                </div>
-                <div class="txt_field">
-                    <input type="password" name="password" value="FakePSW" placeholder="Password" required>
-                    
-                </div>    
-                <input type="submit" value="Login">
+                    <input type="text" placeholder="Roll Number" name="roll_no" required>
+                </div>   
+                <input type="submit" value="Delete">
             </form>
         </div>
     </body>

@@ -28,6 +28,14 @@ public class DataBase {
 		if(rows<=0)
 			System.exit(0);
 	}
+	public void delete(String rno) throws SQLException
+	{
+		PreparedStatement p=con.prepareStatement("delete from student where roll_no=?");
+		p.setString(1, rno);
+		int rows=p.executeUpdate();
+		if(rows<=0)
+			System.exit(0);
+	}
 	public ResultSet show() throws SQLException
 	{
 		ResultSet rs=null;

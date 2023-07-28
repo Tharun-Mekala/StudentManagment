@@ -27,9 +27,19 @@ public class Admin extends HttpServlet {
 		switch(action)
 		{
 		case "/Admin":
-			 rd= request.getRequestDispatcher("Admin_Page.jsp");
-			rd.forward(request, response);
+		{
+			ArrayList<Student> student =new ArrayList<>();
+			try {
+				student=Display();
+				request.setAttribute("list", student);
+				rd= request.getRequestDispatcher("Admin_Page.jsp");
+				rd.forward(request, response);
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
+		}
 		case "/Student_Insert":
 			String rno=request.getParameter("roll_no");
 			String n=request.getParameter("name");
@@ -46,12 +56,42 @@ public class Admin extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+		case "/delete_student":
+			String roll=request.getParameter("roll_no");
+			try {
+				delete(roll);
+				rd=request.getRequestDispatcher("Admin_Page.jsp");
+				rd.forward(request, response);
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
 		}
+	}
+
+	private void delete(String roll) throws ClassNotFoundException, SQLException {
+		DataBase db=new DataBase("Chenna@23");
+		db.delete(roll);
+		
 	}
 
 	private void insert(String rno, String n, String fn, int ta, int pa, String p) throws ClassNotFoundException, SQLException {
 		DataBase db=new DataBase("Chenna@23");
 		db.insert(rno, n, fn, ta, pa, p);
+	}
+	private ArrayList<Student> Display() throws ClassNotFoundException, SQLException
+	{
+		DataBase db= new DataBase("Chenna@23");
+		ResultSet rs=db.show();
+		ArrayList<Student> a = new ArrayList<>();
+		Student s;
+		while(rs.next())
+		{
+			s=new Student(rs.getString("roll_no"),rs.getString("name"),rs.getString("father_name"),rs.getInt("total_fee"),rs.getInt("amount_paid"),rs.getString("phone_num"));
+			a.add(s);
+		}
+		return a;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

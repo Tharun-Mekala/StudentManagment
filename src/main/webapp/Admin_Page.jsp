@@ -3,89 +3,80 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.StudentManagment.*"%>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
-        .button1
+        .button_tag
         {
-            background-color:black;
+            background-color:white;
             color:#fff;
             padding: 15px 15px;
             cursor: pointer;
             display: inline-block;
             margin: 10px 10px;
             text-decoration: none;
+           	margin-left:600px;
         }
-        .button2
+        
+        table,th,td
         {
-            background-color:black;
-            color:#fff;
-            padding: 15px 15px;
-            cursor: pointer;
-            display: inline-block;
-            margin: 10px 10px;
-            text-decoration: none;
-        }
-        table,th
-        {
-            border: 1px solid black;
+            border: 2px solid black;
             border-spacing: 0;
         }
-        th
+        td
         {
-            background-color: lightpink;
+            background-color: #ccffff;
             text-align: center;
         }
-        table
-        {
-            width: 100%;
+        th {
+             background-color: #00CCCC;
+            padding: 10px;
+            text-align: center;
         }
+      	table{
+      		width:75%;
+      		
+      	}
+      	table.center
+      	{
+      		margin-left:auto;
+      		margin-right:auto;
+      	}
         </style>
 </head>
 <body>
- <a href="Student_Form.jsp" target="_blank" class="button1">Add Student</a>
-        <a href="" class="button2">Delete Student</a>
-   <table class="table table-bordered">
- <tr>
+	<div class="button_tag">
+        <button><a href="Student_Form.jsp" >Add Student</a></button>
+        <button><a href="Delete_Student.jsp">Delete Student</a></button>
+	</div>
+	<form action="Search" method="post">
+	<input type="text" placeholder="Search...." name="search">
+	 <input type="submit" value="search">
+	</form>
+    <table class="center">
+ 			<tr>
                 <th>Roll No</th>
                 <th>Name</th>
                 <th>Father Name</th>
                 <th>Total Amount</th>
                 <th>Payment</th>
                 <th>Phone Number</th>
-            </tr>     
-  <%	
-	ResultSet rs=null;
-	ArrayList<Student> st = new ArrayList<>(); 
-	Student s1=null;
-	DataBase db=null;
-	//out.println(ps);
-	try {
-		db=new DataBase("Chenna@23");
-		rs=db.show();
-		while(rs.next())
-		{
-			s1=new Student(rs.getString("roll_no"),rs.getString("name"),rs.getString("father_name"),rs.getInt("total_fee"),rs.getInt("amount_paid"),rs.getString("phone_num"));
-			st.add(s1);
-		}
-		for(Student s:st)
-		{%>
-			<tr><td><%=s.getRno()%></td>
-			<td><%=s.getName()%></td>
-			<td><%=s.getFname()%></td>
-			<td><%=s.getTamt()%></td>
-			<td><%=s.getPamt()%></td>
-			<td><%=s.getPhn()%></td>
-	</tr>
-	<%} } catch (ClassNotFoundException | IOException e) 
-	{
-	e.printStackTrace();
-	}%>
+            </tr>  
+            <tbody> 
+			<c:forEach items="list" var="s">
+			<tr>
+			<td><c:out value="${s.getName() }"/></td>
+			</tr>
+			</c:forEach>	
+			</tbody>
+  
 </table>
 </body>
 </html>

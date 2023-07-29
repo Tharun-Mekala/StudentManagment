@@ -4,6 +4,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <title>DeletePage</title>
         <style>
             body
             {

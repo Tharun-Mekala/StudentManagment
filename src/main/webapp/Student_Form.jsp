@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Input</title>
+        <title>Registration</title>
         <style>
             body
             {
